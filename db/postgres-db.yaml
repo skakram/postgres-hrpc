@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: prod-apps
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: postgresdb
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: Passw0rd!
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+  namespace: prod-apps
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: sc-platinum
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres  # Sets Deployment name
+  namespace: prod-apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.1 # Sets Image
+          imagePullPolicy: "IfNotPresent"
+          env:
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432  # Exposes container port
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres # Sets service name
+  namespace: prod-apps
+  labels:
+    app: postgres # Labels and Selectors
+spec:
+  ports:
+  - protocol: TCP
+    port: 5432
+    nodePort: 31900
+  type: NodePort
+  selector:
+    app: postgres
