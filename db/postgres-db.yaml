@@ -10,19 +10,6 @@ data:
   POSTGRES_USER: admin
   POSTGRES_PASSWORD: Passw0rd!
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pv-claim
-  namespace: prod-apps
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: sc-platinum
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
