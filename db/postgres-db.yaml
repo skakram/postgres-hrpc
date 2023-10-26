@@ -78,6 +78,7 @@ apiVersion: hspc.hitachi.com/v1
 kind: Replication
 metadata:
   name: postgres-db-replication
+  namespace: prod-apps
 spec:
   persistentVolumeClaimName: postgres-pv-claim
   storageClassName: sc-platinum
