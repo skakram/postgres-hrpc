@@ -1,1 +1,1 @@
-# postgres-hrpc
+# Standby Cluster PostgresDB Manifest
