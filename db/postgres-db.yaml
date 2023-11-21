@@ -16,7 +16,7 @@ metadata:
   name: postgres  # Sets Deployment name
   namespace: prod-apps
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: postgres
@@ -61,12 +61,12 @@ spec:
   selector:
     app: postgres
 ---
-# apiVersion: hspc.hitachi.com/v1
-# kind: Replication
-# metadata:
-#   name: postgres-db-replication
-#   namespace: prod-apps
-# spec:
-#   desiredPairState: failover
-#   persistentVolumeClaimName: postgres-pv-claim
-#   storageClassName: sc-platinum
+apiVersion: hspc.hitachi.com/v1
+kind: Replication
+metadata:
+  name: postgres-db-replication
+  namespace: prod-apps
+spec:
+  desiredPairState: failover
+  persistentVolumeClaimName: postgres-pv-claim
+  storageClassName: sc-platinum
