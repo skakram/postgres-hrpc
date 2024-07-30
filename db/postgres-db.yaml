@@ -29,7 +29,7 @@ metadata:
   name: postgres  # Sets Deployment name
   namespace: prod-apps
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: postgres
