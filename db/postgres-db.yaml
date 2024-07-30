@@ -21,7 +21,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: sc-platinum
+  storageClassName: sc-gold-replicated
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -82,5 +82,5 @@ metadata:
 spec:
   desiredPairState: pair
   persistentVolumeClaimName: postgres-pv-claim
-  storageClassName: sc-platinum
+  storageClassName: sc-gold-replicated
 
