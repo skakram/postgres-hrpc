@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         securityContext:
-          runAsUser: anyuid
+          runAsUser: 0
         - name: postgres
           image: postgres:10.1 # Sets Image
           imagePullPolicy: "IfNotPresent"
