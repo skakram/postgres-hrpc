@@ -26,6 +26,8 @@ spec:
         app: postgres
     spec:
       containers:
+        securityContext:
+          allowPrivilegeEscalation: true 
         - name: postgres
           image: postgres:10.1 # Sets Image
           imagePullPolicy: "IfNotPresent"
