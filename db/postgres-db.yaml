@@ -13,6 +13,8 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    openshift.io/scc: anyuid
   name: postgres  # Sets Deployment name
   namespace: prod-apps
 spec:
@@ -26,8 +28,6 @@ spec:
         app: postgres
     spec:
       containers:
-        securityContext:
-          allowPrivilegeEscalation: true 
         - name: postgres
           image: postgres:10.1 # Sets Image
           imagePullPolicy: "IfNotPresent"
