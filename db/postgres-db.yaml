@@ -80,7 +80,7 @@ metadata:
   name: postgres-db-replication
   namespace: prod-apps
 spec:
-  desiredPairState: pair
+  desiredPairState: split
   persistentVolumeClaimName: postgres-pv-claim
   storageClassName: sc-gold-replicated
 
