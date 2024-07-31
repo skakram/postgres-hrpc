@@ -48,7 +48,6 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-pv-claim
       securityContext:
-        runAsUser: 1000
         allowPrivilegeEscalation: true
 ---
 apiVersion: v1
