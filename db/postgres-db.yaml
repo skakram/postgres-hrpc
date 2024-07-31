@@ -31,6 +31,8 @@ spec:
         - name: postgres
           image: postgres:10.1 # Sets Image
           imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsUser: sa-demo
           env:
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata
