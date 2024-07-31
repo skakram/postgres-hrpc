@@ -47,6 +47,8 @@ spec:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-pv-claim
+      securityContext:
+        allowPrivilegeEscalation: true
 ---
 apiVersion: v1
 kind: Service
