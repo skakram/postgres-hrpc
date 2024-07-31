@@ -13,12 +13,10 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    openshift.io/scc: scc-admin
   name: postgres  # Sets Deployment name
   namespace: prod-apps
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: postgres
@@ -31,8 +29,6 @@ spec:
         - name: postgres
           image: postgres:10.1 # Sets Image
           imagePullPolicy: "IfNotPresent"
-          securityContext:
-            runAsUser: 1000790000
           env:
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata
@@ -49,8 +45,6 @@ spec:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-pv-claim
-      serviceAccount: sa-demo
-      serviceAccountName: sa-demo
 ---
 apiVersion: v1
 kind: Service
