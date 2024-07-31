@@ -27,8 +27,6 @@ spec:
       labels:
         app: postgres
     spec:
-      securityContext:
-        runAsUser: sa-demo
       containers:
         - name: postgres
           image: postgres:10.1 # Sets Image
@@ -50,6 +48,7 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-pv-claim
       securityContext:
+        runAsUser: sa-demo
         allowPrivilegeEscalation: true
 ---
 apiVersion: v1
