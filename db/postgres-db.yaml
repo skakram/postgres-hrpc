@@ -31,6 +31,8 @@ spec:
         - name: postgres
           image: postgres:10.1 # Sets Image
           imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsUser: 0
           env:
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata
@@ -47,9 +49,8 @@ spec:
         - name: postgredb
           persistentVolumeClaim:
             claimName: postgres-pv-claim
-      securityContext:
-        runAsUser: 1000790000
-        allowPrivilegeEscalation: true
+      serviceAccount: sa-demo
+      serviceAccountName: sa-demo
 ---
 apiVersion: v1
 kind: Service
